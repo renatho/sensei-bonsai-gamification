@@ -1,0 +1,16 @@
+{
+  "name": "sensei-bonsai-gamification",
+  "version": "0.0.1",
+  "description": "Make your courses more fun with this gamification plugin for Sensei, where the students can claim Knowledge Bonsais in their learning process!",
+  "scripts": {
+    "build": "wp-scripts build assets/scripts/editor.js",
+    "start": "wp-scripts start assets/scripts/editor.js"
+  },
+  "author": "Automattic",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@wordpress/prettier-config": "^1.0.2",
+    "@wordpress/scripts": "^14.1.0",
+    "prettier": "npm:wp-prettier@^2.2.1-beta-1"
+  }
+}
