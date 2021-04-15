@@ -15,10 +15,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Sensei_Bonsai_Gamification_Main {
 
 	/**
+	 * An array which contains job state.
+	 *
+	 * @var array
+	 */
+	private $config_index_assets;
+
+	/**
 	 * Sensei_Main constructor.
 	 */
 	public function __construct() {
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_block_assets' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ] );
+
+		$this->config_index_assets = require plugin_dir_path( SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ) . 'build/index.asset.php';
+	}
+
+	/**
+	 * Enqueue block assets.
+	 *
+	 * @access private
+	 */
+	public function enqueue_block_assets() {
+		wp_enqueue_style(
+			'sensei-bonsai-gamification-style',
+			plugins_url( 'build/style-index.css', SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ),
+			[],
+			$this->config_index_assets['version']
+		);
 	}
 
 	/**
@@ -27,14 +51,19 @@ class Sensei_Bonsai_Gamification_Main {
 	 * @access private
 	 */
 	public function enqueue_block_editor_assets() {
-		$config = require plugin_dir_path( SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ) . 'build/editor.asset.php';
-
 		wp_enqueue_script(
 			'sensei-bonsai-gamification-editor-script',
-			plugins_url( 'build/editor.js', SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ),
-			$config['dependencies'],
-			$config['version'],
+			plugins_url( 'build/index.js', SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ),
+			$this->config_index_assets['dependencies'],
+			$this->config_index_assets['version'],
 			true
+		);
+
+		wp_enqueue_style(
+			'sensei-bonsai-gamification-editor-style',
+			plugins_url( 'build/index.css', SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ),
+			[],
+			$this->config_index_assets['version']
 		);
 	}
 }

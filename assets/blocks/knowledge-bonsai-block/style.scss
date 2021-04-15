@@ -1,0 +1,65 @@
+$block: '.wp-block-sensei-bonsai-gamification-knowledge-bonsai';
+
+@mixin glow-animation( $ball-size, $ball-distance ) {
+	@keyframes spin {
+		100% {
+			transform: rotate( 360deg );
+		}
+	}
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	animation: spin 3s linear infinite;
+	box-shadow: 0 0 30px 50px #fff;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+
+	&::before {
+		content: "";
+		position: absolute;
+		width: $ball-size;
+		height: $ball-size;
+		border-radius: 50%;
+		top: $ball-distance;
+		left: $ball-distance;
+		box-shadow: 0 0 40px 20px #FFF, 0 0 50px 50px rgb(180, 230, 184);
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		width: $ball-size;
+		height: $ball-size;
+		border-radius: 50%;
+		top: -($ball-distance + $ball-size);
+		left: -($ball-distance + $ball-size);
+		box-shadow: 0 0 40px 20px #FFF, 0 0 50px 50px rgb(245, 245, 172);
+	}
+}
+
+.sensei .entry-content #{$block},
+.editor-styles-wrapper #{$block},
+#{$block} {
+	padding: 40px;
+
+	&__bonsai,
+	&__congratulations-message {
+		margin: 0 0 20px;
+	}
+
+	&__bonsai {
+		position: relative;
+		display: inline-block;
+
+		&__glow {
+			@include glow-animation( 1px, 15px );
+		}
+
+		&__icon {
+			position: relative;
+			z-index: 2;
+		}
+	}
+}
