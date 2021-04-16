@@ -55,7 +55,7 @@ const KnowledgeBonsai = ( {
 
 				<div className="wp-block-button">
 					<RichTextComponent
-						className="wp-block-button__link"
+						className="wp-block-button__link wp-block-sensei-bonsai-gamification-knowledge-bonsai__bonsai__button claim-bonsai-button"
 						value={ buttonLabel }
 						{ ...( 'edit' === scope
 							? {

@@ -51,8 +51,8 @@ class Sensei_Bonsai_Gamification_Main {
 			wp_enqueue_script(
 				'sensei-bonsai-gamification-frontend-script',
 				plugins_url( 'build/frontend.js', SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ),
-				$this->config_index_assets['dependencies'],
-				$this->config_index_assets['version'],
+				$this->config_frontend_assets['dependencies'],
+				$this->config_frontend_assets['version'],
 				true
 			);
 		}

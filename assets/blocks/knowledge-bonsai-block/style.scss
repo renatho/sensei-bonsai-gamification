@@ -61,5 +61,9 @@ $block: '.wp-block-sensei-bonsai-gamification-knowledge-bonsai';
 			position: relative;
 			z-index: 2;
 		}
+
+		&__button:disabled {
+			opacity: 0.5;
+		}
 	}
 }
