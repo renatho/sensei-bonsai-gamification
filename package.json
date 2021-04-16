@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Make your courses more fun with this gamification plugin for Sensei, where the students can claim Knowledge Bonsais in their learning process!",
   "scripts": {
-    "build": "wp-scripts build assets/blocks/index.js",
-    "start": "wp-scripts start assets/blocks/index.js",
+    "build": "wp-scripts build assets/blocks/index.js assets/blocks/frontend.js",
+    "start": "wp-scripts start assets/blocks/index.js assets/blocks/frontend.js",
 		"lint-js": "wp-scripts lint-js --ext js assets"
   },
   "author": "Automattic",
