@@ -9,6 +9,7 @@ This project is a work in progress. Some pending items:
 - Issue that copies the unique ID when copying a Knowledge Bonsai block.
 - Don't show the knowledge bonsai if user is not logged-in.
 - Ranking block (maybe "My Bonsais Forest block").
+- Remove bonsai ID from post when block is removed.
 - Bonsais design.
 - Sounds design.
 - Animations design.
