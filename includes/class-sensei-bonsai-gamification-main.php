@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Main plugin class.
  */
 class Sensei_Bonsai_Gamification_Main {
-
 	/**
 	 * An array which contains job state.
 	 *
@@ -27,6 +26,8 @@ class Sensei_Bonsai_Gamification_Main {
 	public function __construct() {
 		add_action( 'enqueue_block_assets', [ $this, 'enqueue_block_assets' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ] );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ] );
+		add_action( 'wp_ajax_sensei_bonsai_gamification_claim_bonsai', array( $this, 'claim_bonsai' ) );
 
 		$this->config_index_assets = require plugin_dir_path( SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ) . 'build/index.asset.php';
 	}
@@ -55,6 +56,22 @@ class Sensei_Bonsai_Gamification_Main {
 				$this->config_frontend_assets['version'],
 				true
 			);
+
+			global $post;
+
+			wp_localize_script(
+				'sensei-bonsai-gamification-frontend-script',
+				'sensei_bonsai_gamification',
+				[
+					'postId'     => $post->ID,
+					'claimSound' => plugins_url( 'build/sounds/bonsai.mp3', SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ),
+					'ajax'       => [
+						'nonce'  => wp_create_nonce( 'sensei_bonsai_gamification_' . $post->ID ),
+						'url'    => admin_url( 'admin-ajax.php' ),
+						'action' => 'sensei_bonsai_gamification_claim_bonsai',
+					],
+				]
+			);
 		}
 	}
 
@@ -78,5 +95,22 @@ class Sensei_Bonsai_Gamification_Main {
 			[],
 			$this->config_index_assets['version']
 		);
+	}
+
+	/**
+	 * Claim bonsai Ajax.
+	 *
+	 * @access private
+	 */
+	public function claim_bonsai() {
+		if ( ! isset( $_POST['post_id'] ) || ! isset( $_POST['bonsai_id'] ) ) {
+			wp_die();
+		}
+
+		check_ajax_referer( 'sensei_bonsai_gamification_' . absint( $_POST['post_id'] ) );
+
+		error_log( $_POST['post_id'] );
+		error_log( $_POST['bonsai_id'] );
+		error_log( get_current_user_id() );
 	}
 }
