@@ -13,7 +13,7 @@ import Settings from './settings';
 
 const KnowledgeBonsai = ( {
 	className,
-	attributes: { bonsaiType, congratulationsMessage, buttonLabel },
+	attributes: { bonsaiId, bonsaiType, congratulationsMessage, buttonLabel },
 	setAttributes,
 	scope,
 } ) => {
@@ -67,7 +67,10 @@ const KnowledgeBonsai = ( {
 										'sensei-bonsai-gamification'
 									),
 							  }
-							: { tagName: 'button' } ) }
+							: {
+									tagName: 'button',
+									'data-bonsai-id': bonsaiId,
+							  } ) }
 					/>
 				</div>
 			</section>

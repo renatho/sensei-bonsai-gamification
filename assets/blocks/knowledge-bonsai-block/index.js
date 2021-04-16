@@ -7,7 +7,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import KnowledgeBonsai from './knowledge-bonsai';
+import edit from './edit';
+import save from './save';
 
 registerBlockType( 'sensei-bonsai-gamification/knowledge-bonsai', {
 	title: __( 'Knowledge Bonsai', 'sensei-bonsai-gamification' ),
@@ -29,6 +30,9 @@ registerBlockType( 'sensei-bonsai-gamification/knowledge-bonsai', {
 		},
 	},
 	attributes: {
+		bonsaiId: {
+			type: 'string',
+		},
 		bonsaiType: {
 			type: 'string',
 			default: 'bonsaiA',
@@ -48,6 +52,6 @@ registerBlockType( 'sensei-bonsai-gamification/knowledge-bonsai', {
 			),
 		},
 	},
-	edit: ( props ) => <KnowledgeBonsai { ...props } scope="edit" />,
-	save: ( props ) => <KnowledgeBonsai { ...props } scope="save" />,
+	edit,
+	save,
 } );
