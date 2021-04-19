@@ -1,0 +1,25 @@
+$block: '.wp-block-sensei-bonsai-gamification-my-bonsai-forest';
+
+.sensei .entry-content #{$block},
+.editor-styles-wrapper #{$block},
+#{$block} {
+	&__title,
+	&__introduction {
+		margin: 0 0 20px;
+		padding: 0
+	}
+
+	&__list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+
+		&__item {
+			flex: 1;
+			opacity: 0.4;
+			text-align: center;
+		}
+	}
+}

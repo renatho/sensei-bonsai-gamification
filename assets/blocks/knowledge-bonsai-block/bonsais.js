@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { Path, SVG } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 export const bonsaiA = (
 	<SVG viewBox="0 0 175 175" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,27 +81,27 @@ export const bonsaiE = (
 const bonsais = [
 	{
 		value: 'bonsaiA',
-		label: 'Bonsai A',
+		label: __( 'Bonsai A', 'sensei-bonsai-gamification' ),
 		icon: bonsaiA,
 	},
 	{
 		value: 'bonsaiB',
-		label: 'Bonsai B',
+		label: __( 'Bonsai B', 'sensei-bonsai-gamification' ),
 		icon: bonsaiB,
 	},
 	{
 		value: 'bonsaiC',
-		label: 'Bonsai C',
+		label: __( 'Bonsai C', 'sensei-bonsai-gamification' ),
 		icon: bonsaiC,
 	},
 	{
 		value: 'bonsaiD',
-		label: 'Bonsai D',
+		label: __( 'Bonsai D', 'sensei-bonsai-gamification' ),
 		icon: bonsaiD,
 	},
 	{
 		value: 'bonsaiE',
-		label: 'Bonsai E',
+		label: __( 'Bonsai E', 'sensei-bonsai-gamification' ),
 		icon: bonsaiE,
 	},
 ];
