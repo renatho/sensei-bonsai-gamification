@@ -29,36 +29,12 @@
 	<rule ref="WordPress.Security.ValidatedSanitizedInput" />
 	<rule ref="WordPress.DB.DirectDatabaseQuery" />
 
-	<!-- Array Syntax (disabled until we transition to short-array) -->
-<!--
-	<rule ref="Generic.Arrays.DisallowLongArraySyntax">
-		<include-pattern>/sensei-lms.php</include-pattern>
-		<include-pattern>/uninstall.php</include-pattern>
-		<include-pattern>/includes/class-sensei-dependency-checker.php</include-pattern>
-	</rule>
-
-	<rule ref="Generic.Arrays.DisallowShortArraySyntax">
-		<include-pattern>/sensei-lms.php</include-pattern>
-		<include-pattern>/uninstall.php</include-pattern>
-		<include-pattern>/includes/class-sensei-dependency-checker.php</include-pattern>
-	</rule>
--->
-
-	<!-- Temporary Rule Exclusions -->
-	<rule ref="VariableAnalysis">
-		<exclude-pattern>includes/admin/views/</exclude-pattern>
-		<exclude-pattern>templates/</exclude-pattern>
-
-		<severity>4</severity>
-	</rule>
-	<!-- End of Temporary Rule Exclusions -->
-
 	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
 		<exclude-pattern>tests/framework/actionscheduler-mocks.php</exclude-pattern>
 	</rule>
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="sensei-lms" />
+			<property name="text_domain" type="array" value="sensei-bonsai-gamification" />
 		</properties>
 	</rule>
 
