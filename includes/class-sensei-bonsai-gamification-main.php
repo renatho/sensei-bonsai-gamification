@@ -28,7 +28,6 @@ class Sensei_Bonsai_Gamification_Main {
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ] );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ] );
 		add_action( 'wp_ajax_sensei_bonsai_gamification_claim_bonsai', array( $this, 'claim_bonsai' ) );
-		add_action( 'init', [ $this, 'register_post_metas' ] );
 
 		$this->config_index_assets = require plugin_dir_path( SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ) . 'build/index.asset.php';
 	}
@@ -164,26 +163,5 @@ class Sensei_Bonsai_Gamification_Main {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Register post metas.
-	 *
-	 * @access private
-	 */
-	public function register_post_metas() {
-		register_post_meta(
-			'',
-			'_bonsai_ids',
-			[
-				'show_in_rest'  => true,
-				'single'        => false,
-				'type'          => 'string',
-				'auth_callback' => function( $allowed, $meta_key, $post_id ) {
-					$post_type = get_post_type( $post_id );
-					return current_user_can( get_post_type_object( $post_type )->cap->edit_post, $post_id );
-				},
-			]
-		);
 	}
 }
