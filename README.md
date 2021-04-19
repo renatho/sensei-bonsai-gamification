@@ -7,11 +7,10 @@ Make your courses more fun with this gamification plugin for Sensei, where the s
 This project is a work in progress. Some pending items:
 
 - Issue that copies the unique ID when copying a Knowledge Bonsai block.
-- Mark bonsai as claimed when it has already been claimed.
 - Add extra check to make sure user has access to the page content (course, lesson, etc.).
 - Register block from metadata to get default attributes. But how to translate them in the json?
 - Don't show the knowledge bonsai if user is not logged-in.
-- Ranking block (maybe "My Bonsais Forest block").
+- Ranking block (so competitions can be done between users).
 - Bonsais design.
 - Sounds design.
 - Animations design.

@@ -13,6 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Main plugin class.
  */
 class Sensei_Bonsai_Gamification_Main {
+	const USER_BONSAIS_META_KEY = '_sensei_bonsai_gamification_bonsais';
+
 	/**
 	 * An array which contains job state.
 	 *
@@ -59,13 +61,20 @@ class Sensei_Bonsai_Gamification_Main {
 
 			global $post;
 
+			$user_bonsais = get_user_meta( get_current_user_id(), self::USER_BONSAIS_META_KEY, true );
+
+			if ( empty( $user_bonsais ) ) {
+				$user_bonsais = [];
+			}
+
 			wp_localize_script(
 				'sensei-bonsai-gamification-frontend-script',
 				'sensei_bonsai_gamification',
 				[
-					'postId'     => $post->ID,
-					'claimSound' => plugins_url( 'build/sounds/bonsai.mp3', SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ),
-					'ajax'       => [
+					'postId'      => $post->ID,
+					'claimSound'  => plugins_url( 'build/sounds/bonsai.mp3', SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ),
+					'userBonsais' => $user_bonsais,
+					'ajax'        => [
 						'nonce'  => wp_create_nonce( 'sensei_bonsai_gamification_' . $post->ID ),
 						'url'    => admin_url( 'admin-ajax.php' ),
 						'action' => 'sensei_bonsai_gamification_claim_bonsai',
@@ -110,7 +119,6 @@ class Sensei_Bonsai_Gamification_Main {
 		check_ajax_referer( 'sensei_bonsai_gamification_' . absint( $_POST['post_id'] ) );
 
 		$user_id      = get_current_user_id();
-		$meta_key     = '_sensei_bonsai_gamification_bonsais';
 		$bonsai_id    = sanitize_key( $_POST['bonsai_id'] );
 		$post         = get_post( absint( $_POST['post_id'] ) );
 		$post_blocks  = parse_blocks( $post->post_content );
@@ -121,21 +129,22 @@ class Sensei_Bonsai_Gamification_Main {
 			wp_die( esc_html__( 'Bonsai not found.', 'sensei-bonsai-gamification' ), 404 );
 		}
 
-		$bonsais         = get_user_meta( $user_id, $meta_key, true );
-		$user_bonsai_ids = wp_list_pluck( $bonsais, 'bonsaiId' );
+		$user_bonsais = get_user_meta( $user_id, self::USER_BONSAIS_META_KEY, true );
+
+		if ( empty( $user_bonsais ) ) {
+			$user_bonsais = [];
+		}
+
+		$user_bonsai_ids = wp_list_pluck( $user_bonsais, 'bonsaiId' );
 
 		// Skip if bonsai has been already collected.
 		if ( in_array( $bonsai_id, $user_bonsai_ids, true ) ) {
 			wp_die( esc_html__( 'Bonsai already got.', 'sensei-bonsai-gamification' ), 403 );
 		}
 
-		if ( empty( $bonsais ) ) {
-			$bonsais = [];
-		}
+		$user_bonsais[] = $bonsai_block['attrs'];
 
-		$bonsais[] = $bonsai_block['attrs'];
-
-		update_user_meta( get_current_user_id(), $meta_key, $bonsais );
+		update_user_meta( get_current_user_id(), self::USER_BONSAIS_META_KEY, $user_bonsais );
 	}
 
 	/**

@@ -53,7 +53,9 @@ const MyBonsaiForest = ( {
 						data-bonsai-type={ bonsai.value }
 					>
 						<Icon icon={ bonsai.icon } size="100" />
-						<p>{ bonsai.label }</p>
+						<p className="wp-block-sensei-bonsai-gamification-my-bonsai-forest__list__item__label">
+							{ bonsai.label }
+						</p>
 					</li>
 				) ) }
 			</ul>

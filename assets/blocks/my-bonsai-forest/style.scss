@@ -18,8 +18,18 @@ $block: '.wp-block-sensei-bonsai-gamification-my-bonsai-forest';
 
 		&__item {
 			flex: 1;
+			margin: 10px;
 			opacity: 0.4;
 			text-align: center;
+
+			&__label {
+				margin: 0;
+				padding: 0;
+			}
+
+			&--claimed {
+				opacity: 1;
+			}
 		}
 	}
 }
