@@ -21,6 +21,7 @@ $block: '.wp-block-sensei-bonsai-gamification-my-bonsai-forest';
 			margin: 10px;
 			opacity: 0.4;
 			text-align: center;
+			transition: opacity 1s 0.5s;
 
 			&__label {
 				margin: 0;
