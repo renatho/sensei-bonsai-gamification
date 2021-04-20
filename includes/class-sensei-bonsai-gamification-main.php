@@ -47,19 +47,19 @@ class Sensei_Bonsai_Gamification_Main {
 			$this->config_index_assets['version']
 		);
 
-		// Frontend only.
-		$this->config_frontend_assets = require plugin_dir_path( SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ) . 'build/frontend.asset.php';
+		global $post;
 
-		if ( ! is_admin() ) {
+		// Frontend only.
+		if ( ! is_admin() && isset( $post ) ) {
+			$config_frontend_assets = require plugin_dir_path( SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ) . 'build/frontend.asset.php';
+
 			wp_enqueue_script(
 				'sensei-bonsai-gamification-frontend-script',
 				plugins_url( 'build/frontend.js', SENSEI_BONSAI_GAMIFICATION_PLUGIN_FILE ),
-				$this->config_frontend_assets['dependencies'],
-				$this->config_frontend_assets['version'],
+				$config_frontend_assets['dependencies'],
+				$config_frontend_assets['version'],
 				true
 			);
-
-			global $post;
 
 			$user_bonsais = get_user_meta( get_current_user_id(), self::USER_BONSAIS_META_KEY, true );
 
